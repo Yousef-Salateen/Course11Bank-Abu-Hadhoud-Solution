@@ -18,6 +18,20 @@ private:
     std::string _PinCode;
     double _Balance;
 
+    enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _ePinCode, _eBalance };
+    static clsBankClient _ConvertLineToObject(const std::string& Line, const std::string& splitter = "#//#")
+    {
+        std::vector<std::string> vInfo = clsString::Split(Line, splitter);
+
+        return clsBankClient(vInfo.at(enInfoPlace::_eFirstName), vInfo.at(enInfoPlace::_eLastName), vInfo.at(enInfoPlace::_eEmail),
+            vInfo.at(enInfoPlace::_ePhone), vInfo.at(enInfoPlace::_eAccNumber), vInfo.at(enInfoPlace::_ePinCode),
+            std::stod(vInfo.at(enInfoPlace::_eBalance)), enMode::_UpdateMode);
+    }
+
+    static clsBankClient _EmptyObject()
+    {
+        return clsBankClient("", "", "", "", "", "", 0, enMode::_EmptyMode);
+    }
 
 public:
     clsBankClient(const std::string& FirstName, const std::string& LastName, const std::string& Email, const std::string& Phone,
