@@ -86,4 +86,62 @@ public:
         std::cout << "\n_________________" << std::endl;
     }
 
+    static clsBankClient Find(const std::string& AccNumber)
+    {
+        std::fstream File;
+
+        File.open("Clients.txt", std::ios::in);
+
+        if (File.is_open())
+        {
+            std::string Line;
+
+            while (std::getline(File, Line))
+            {
+                clsBankClient Client = _ConvertLineToObject(Line);
+
+                if (Client.AccNumber() == AccNumber)
+                {
+                    File.close();
+                    return Client;
+                }
+            }
+            File.close();
+        }
+
+        return _EmptyObject();
+    }
+
+    static clsBankClient Find(const std::string& AccNumber, const std::string& PinCode)
+    {
+        std::fstream File;
+
+        File.open("Clients.txt", std::ios::in);
+
+        if (File.is_open())
+        {
+            std::string Line;
+
+            while (std::getline(File, Line))
+            {
+                clsBankClient Client = _ConvertLineToObject(Line);
+
+                if (Client.AccNumber() == AccNumber && Client.PinCode() == PinCode)
+                {
+                    File.close();
+                    return Client;
+                }
+            }
+            File.close();
+        }
+
+        return _EmptyObject();
+    }
+
+    static bool IsClientExist(const std::string& AccNumber)
+    {
+        clsBankClient Client = Find(AccNumber);
+
+        return !Client.IsEmpty();
+    }
 };
