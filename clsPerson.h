@@ -13,7 +13,11 @@ private:
 
 public:
 
+<<<<<<< HEAD
 	clsPerson(const std::string& FirstName, const std::string& LastName, const std::string& Email, const std::string& Phone) :
+=======
+	clsPerson(const std::string FirstName, const std::string LastName, const std::string Email, const std::string Phone) :
+>>>>>>> 378963d (Created person class with setters and getters)
 		_FirstName(FirstName), _LastName(LastName), _Email(Email), _Phone(Phone)
 	{
 
