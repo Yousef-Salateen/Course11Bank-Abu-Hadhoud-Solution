@@ -12,7 +12,6 @@ private:
 	std::string _Phone;
 
 public:
-
 	clsPerson(const std::string& FirstName, const std::string& LastName, const std::string& Email, const std::string& Phone) :
 		_FirstName(FirstName), _LastName(LastName), _Email(Email), _Phone(Phone)
 	{
