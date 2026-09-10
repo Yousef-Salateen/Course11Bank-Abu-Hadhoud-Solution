@@ -142,8 +142,14 @@
     <ClCompile Include="Course11.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clsDate.h" />
     <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsPeriod.h" />
+    <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUtility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Course11.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
