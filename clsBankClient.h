@@ -18,7 +18,8 @@ private:
     std::string _PinCode;
     double _Balance;
 
-    enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _ePinCode, _eBalance };
+    enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _eBalance };
+
     static clsBankClient _ConvertLineToObject(const std::string& Line, const std::string& splitter = "#//#")
     {
         std::vector<std::string> vInfo = clsString::Split(Line, splitter);
@@ -26,6 +27,76 @@ private:
         return clsBankClient(vInfo.at(enInfoPlace::_eFirstName), vInfo.at(enInfoPlace::_eLastName), vInfo.at(enInfoPlace::_eEmail),
             vInfo.at(enInfoPlace::_ePhone), vInfo.at(enInfoPlace::_eAccNumber), vInfo.at(enInfoPlace::_ePinCode),
             std::stod(vInfo.at(enInfoPlace::_eBalance)), enMode::_UpdateMode);
+    }
+
+    static std::vector<clsBankClient> _LoadClientDataFromFile()
+    {
+        std::vector<clsBankClient> vClients;
+
+        std::fstream File;
+        File.open("Clients.txt", std::ios::in);
+
+        if (File.is_open())
+        {
+            std::string Line;
+
+            while (std::getline(File, Line))
+            {
+                vClients.push_back(_ConvertLineToObject(Line));
+            }
+
+            File.close();
+        }
+
+        return vClients;
+    }
+
+    static std::string _ConvertObjectToLine(const clsBankClient& Client, const std::string& splitter = "#//#")
+    {
+        std::string Line;
+
+        Line.append(Client.FirstName() + splitter);
+        Line.append(Client.LastName() + splitter);
+        Line.append(Client.Email() + splitter);
+        Line.append(Client.Phone() + splitter);
+        Line.append(Client.AccNumber() + splitter);
+        Line.append(Client.PinCode() + splitter);
+        Line.append(std::to_string(Client.Balance()));
+
+        return Line;
+    }
+
+    static void _SaveClientDataToFile(const std::vector<clsBankClient>& vClients)
+    {
+        std::fstream File;
+
+        File.open("Clients.txt", std::ios::out);
+
+        if (File.is_open())
+        {
+            for (const clsBankClient& Client : vClients)
+            {
+                File << _ConvertObjectToLine(Client) << std::endl;
+            }
+
+            File.close();
+        }
+    }
+
+    void _Update() const
+    {
+        std::vector<clsBankClient> vClients = _LoadClientDataFromFile();
+
+        for (clsBankClient& Client : vClients)
+        {
+            if (Client.AccNumber() == this->AccNumber())
+            {
+                Client = *this;
+                break;
+            }
+        }
+
+        _SaveClientDataToFile(vClients);
     }
 
     static clsBankClient _EmptyObject()
@@ -51,27 +122,27 @@ public:
         _Balance = Balance;
     }
 
-    std::string AccNumber()
+    std::string AccNumber() const
     {
         return _AccNumber;
     }
 
-    std::string PinCode()
+    std::string PinCode() const
     {
         return _PinCode;
     }
 
-    double Balance()
+    double Balance() const
     {
         return _Balance;
     }
 
-    bool IsEmpty()
+    bool IsEmpty() const
     {
         return _Mode == enMode::_EmptyMode;
     }
 
-    void Print()
+    void Print() const
     {
         std::cout << "\nClient Card:";
         std::cout << "\n_________________";
@@ -136,6 +207,20 @@ public:
         }
 
         return _EmptyObject();
+    }
+
+    enum enSaveResult { eFailedEmptyObject = 0, eSucceeded };
+    enSaveResult Save()
+    {
+        switch (_Mode)
+        {
+        default: case enMode::_EmptyMode:
+            return enSaveResult::eFailedEmptyObject;
+
+        case enMode::_UpdateMode:
+            _Update();
+            return enSaveResult::eSucceeded;
+        }
     }
 
     static bool IsClientExist(const std::string& AccNumber)
