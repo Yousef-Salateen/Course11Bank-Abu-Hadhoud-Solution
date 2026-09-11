@@ -83,6 +83,22 @@ private:
         }
     }
 
+    void _Update() const
+    {
+        std::vector<clsBankClient> vClients = _LoadClientDataFromFile();
+
+        for (clsBankClient& Client : vClients)
+        {
+            if (Client.AccNumber() == this->AccNumber())
+            {
+                Client = *this;
+                break;
+            }
+        }
+
+        _SaveClientDataToFile(vClients);
+    }
+
     static clsBankClient _EmptyObject()
     {
         return clsBankClient("", "", "", "", "", "", 0, enMode::_EmptyMode);
