@@ -19,6 +19,7 @@ private:
     double _Balance;
 
     enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _ePinCode, _eBalance };
+
     static clsBankClient _ConvertLineToObject(const std::string& Line, const std::string& splitter = "#//#")
     {
         std::vector<std::string> vInfo = clsString::Split(Line, splitter);
@@ -26,6 +27,28 @@ private:
         return clsBankClient(vInfo.at(enInfoPlace::_eFirstName), vInfo.at(enInfoPlace::_eLastName), vInfo.at(enInfoPlace::_eEmail),
             vInfo.at(enInfoPlace::_ePhone), vInfo.at(enInfoPlace::_eAccNumber), vInfo.at(enInfoPlace::_ePinCode),
             std::stod(vInfo.at(enInfoPlace::_eBalance)), enMode::_UpdateMode);
+    }
+
+    static std::vector<clsBankClient> _LoadClientDataFromFile()
+    {
+        std::vector<clsBankClient> vClients;
+
+        std::fstream File;
+        File.open("Clients.txt", std::ios::in);
+
+        if (File.is_open())
+        {
+            std::string Line;
+
+            while (std::getline(File, Line))
+            {
+                vClients.push_back(_ConvertLineToObject(Line));
+            }
+
+            File.close();
+        }
+
+        return vClients;
     }
 
     static clsBankClient _EmptyObject()
