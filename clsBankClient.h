@@ -18,7 +18,7 @@ private:
     std::string _PinCode;
     double _Balance;
 
-    enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _ePinCode, _eBalance };
+    enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _eBalance };
 
     static clsBankClient _ConvertLineToObject(const std::string& Line, const std::string& splitter = "#//#")
     {
@@ -51,6 +51,21 @@ private:
         return vClients;
     }
 
+    static std::string _ConvertObjectToLine(const clsBankClient& Client, const std::string& splitter = "#//#")
+    {
+        std::string Line;
+
+        Line.append(Client.FirstName() + splitter);
+        Line.append(Client.LastName() + splitter);
+        Line.append(Client.Email() + splitter);
+        Line.append(Client.Phone() + splitter);
+        Line.append(Client.AccNumber() + splitter);
+        Line.append(Client.PinCode() + splitter);
+        Line.append(std::to_string(Client.Balance()));
+
+        return Line;
+    }
+
     static clsBankClient _EmptyObject()
     {
         return clsBankClient("", "", "", "", "", "", 0, enMode::_EmptyMode);
@@ -74,27 +89,27 @@ public:
         _Balance = Balance;
     }
 
-    std::string AccNumber()
+    std::string AccNumber() const
     {
         return _AccNumber;
     }
 
-    std::string PinCode()
+    std::string PinCode() const
     {
         return _PinCode;
     }
 
-    double Balance()
+    double Balance() const
     {
         return _Balance;
     }
 
-    bool IsEmpty()
+    bool IsEmpty() const
     {
         return _Mode == enMode::_EmptyMode;
     }
 
-    void Print()
+    void Print() const
     {
         std::cout << "\nClient Card:";
         std::cout << "\n_________________";
