@@ -209,6 +209,20 @@ public:
         return _EmptyObject();
     }
 
+    enum enSaveResult { eFailedEmptyObject = 0, eSucceeded };
+    enSaveResult Save()
+    {
+        switch (_Mode)
+        {
+        default: case enMode::_EmptyMode:
+            return enSaveResult::eFailedEmptyObject;
+
+        case enMode::_UpdateMode:
+            _Update();
+            return enSaveResult::eSucceeded;
+        }
+    }
+
     static bool IsClientExist(const std::string& AccNumber)
     {
         clsBankClient Client = Find(AccNumber);
