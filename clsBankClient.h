@@ -66,6 +66,23 @@ private:
         return Line;
     }
 
+    static void _SaveClientDataToFile(const std::vector<clsBankClient>& vClients)
+    {
+        std::fstream File;
+
+        File.open("Clients.txt", std::ios::out);
+
+        if (File.is_open())
+        {
+            for (const clsBankClient& Client : vClients)
+            {
+                File << _ConvertObjectToLine(Client) << std::endl;
+            }
+
+            File.close();
+        }
+    }
+
     static clsBankClient _EmptyObject()
     {
         return clsBankClient("", "", "", "", "", "", 0, enMode::_EmptyMode);
