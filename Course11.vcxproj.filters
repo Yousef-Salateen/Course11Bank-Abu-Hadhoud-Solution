@@ -35,6 +35,12 @@
     <ClInclude Include="clsPeriod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsPerson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsBankClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Course11.rc">
