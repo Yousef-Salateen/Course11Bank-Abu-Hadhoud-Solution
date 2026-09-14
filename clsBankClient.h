@@ -297,4 +297,17 @@ public:
     {
         return _LoadClientDataFromFile();
     }
+
+    static double GetTotalBalances()
+    {
+        std::vector<clsBankClient> vClients = _LoadClientDataFromFile();
+        double Total = 0.0;
+
+        for(const clsBankClient& Client : vClients)
+        {
+            Total += Client.Balance();
+        }
+
+        return Total;
+    }
 };
