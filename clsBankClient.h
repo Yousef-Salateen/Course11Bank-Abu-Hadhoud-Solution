@@ -260,6 +260,27 @@ public:
         }
     }
 
+    bool Delete()
+    {
+        std::vector<clsBankClient> vClients = _LoadClientDataFromFile();
+
+        for (clsBankClient& Client : vClients)
+        {
+            if (this->AccNumber() == Client.AccNumber())
+            {
+                Client._MarkedForDelete = true;
+                break;
+            }
+        }
+
+
+        _SaveClientDataToFile(vClients);
+
+        *this = _EmptyObject();
+
+        return true;
+    }
+
     static bool IsClientExist(const std::string& AccNumber)
     {
         clsBankClient Client = Find(AccNumber);
