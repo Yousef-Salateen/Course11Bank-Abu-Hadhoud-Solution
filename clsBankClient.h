@@ -83,6 +83,19 @@ private:
         }
     }
 
+    void _AddDataLineToFile(const std::string& Line)
+    {
+        std::fstream File;
+
+        File.open("Clients.txt", std::ios::out | std::ios::app);
+
+        if (File.is_open())
+        {
+            File << Line << std::endl;
+            File.close();
+        }
+    }
+
     void _Update() const
     {
         std::vector<clsBankClient> vClients = _LoadClientDataFromFile();
