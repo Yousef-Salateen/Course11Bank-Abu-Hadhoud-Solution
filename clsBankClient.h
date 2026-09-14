@@ -259,4 +259,9 @@ public:
 
         return !Client.IsEmpty();
     }
+
+    static clsBankClient AddNewObject(const std::string& AccNumber)
+    {
+        return clsBankClient("", "", "", "", AccNumber, "", 0.0, enMode::_AddNewMode);
+    }
 };

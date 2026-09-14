@@ -14,6 +14,39 @@ static void ReadClient(clsBankClient& Client)
 	Client.setBalance(clsInputValidate::Read<double>("Balance: "));
 }
 
+static void AddClient()
+{
+	string AccNumber = clsInputValidate::Read<string>("Please Enter a Valid Account Number : ");
+
+	while (!clsBankClient::IsClientExist(AccNumber))
+	{
+		AccNumber = clsInputValidate::Read <string>("Account Number is not found, enter another one: ");
+	}
+
+	clsBankClient Client = clsBankClient::AddNewObject(AccNumber);
+
+	ReadClient(Client);
+
+	clsBankClient::enSaveResult SaveResult;
+	Client.Save();
+
+	switch (SaveResult)
+	{
+	default: case clsBankClient::enSaveResult::eFailedEmptyObject:
+		cout << "Failed the save, object is empty" << endl;
+		break;
+
+	case clsBankClient::enSaveResult::eFailedExistingAccNumber:
+		cout << "Failed the save, account number already exists" << endl;
+		break;
+
+	case clsBankClient::enSaveResult::eSucceeded:
+		cout << "\nAdded Successfully\n";
+		Client.Print();
+		break;
+	}
+}
+
 static void UpdateClient()
 {
 	string AccNumber = clsInputValidate::Read<string>("Please Enter a Valid Account Number: ");
