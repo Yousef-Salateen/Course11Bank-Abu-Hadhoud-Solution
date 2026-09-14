@@ -16,7 +16,8 @@ private:
 
     std::string _AccNumber;
     std::string _PinCode;
-    double _Balance;
+    double _Balance = 0.0;
+    bool _MarkedForDelete = false;
 
     enum enInfoPlace { _eFirstName, _eLastName, _eEmail, _ePhone, _eAccNumber, _ePinCode, _eBalance };
 
@@ -76,7 +77,8 @@ private:
         {
             for (const clsBankClient& Client : vClients)
             {
-                File << _ConvertObjectToLine(Client) << std::endl;
+                if(!Client.MarkedForDelete()) 
+                    File << _ConvertObjectToLine(Client) << std::endl;
             }
 
             File.close();
@@ -158,6 +160,11 @@ public:
     bool IsEmpty() const
     {
         return _Mode == enMode::_EmptyMode;
+    }
+
+    bool MarkedForDelete() const
+    {
+        return _MarkedForDelete;
     }
 
     void Print() const
@@ -251,6 +258,27 @@ public:
                 return enSaveResult::eSucceeded;
             }
         }
+    }
+
+    bool Delete()
+    {
+        std::vector<clsBankClient> vClients = _LoadClientDataFromFile();
+
+        for (clsBankClient& Client : vClients)
+        {
+            if (this->AccNumber() == Client.AccNumber())
+            {
+                Client._MarkedForDelete = true;
+                break;
+            }
+        }
+
+
+        _SaveClientDataToFile(vClients);
+
+        *this = _EmptyObject();
+
+        return true;
     }
 
     static bool IsClientExist(const std::string& AccNumber)
