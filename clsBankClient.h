@@ -292,4 +292,9 @@ public:
     {
         return clsBankClient("", "", "", "", AccNumber, "", 0.0, enMode::_AddNewMode);
     }
+
+    static std::vector<clsBankClient> GetClientList()
+    {
+        return _LoadClientDataFromFile();
+    }
 };

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 
@@ -105,6 +106,39 @@ static void DeleteClient()
 			cout << "Client was not deletd" << endl;
 		}
 	}
+}
+
+static void PrintClientLine(const clsBankClient& Client)
+{
+	cout << "|" << left << setw(15) << Client.AccNumber();
+	cout << "|" << left << setw(40) << Client.FullName();
+	cout << "|" << left << setw(10) << Client.PinCode();
+	cout << "|" << left << setw(15) << Client.Phone();
+	cout << "|" << left << setw(10) << Client.Balance() << endl;
+}
+
+static void PrintClientList()
+{
+	vector <clsBankClient> vClients = clsBankClient::GetClientList();
+
+	cout << "\n\t\t\t Clients List (" << vClients.size() << ") Client(s).\n";
+	cout << "\n____________________________________________________________________________________________________________________" << endl;
+	cout << "|" << left << setw(15) << "Account Number";
+	cout << "|" << left << setw(40) << "Name";
+	cout << "|" << left << setw(10) << "Pin Code";
+	cout << "|" << left << setw(15) << "Phone Number";
+	cout << "|" << left << setw(10) << "Balance" << endl;
+	cout << "\n____________________________________________________________________________________________________________________" << endl;
+
+	if (vClients.size())
+		for (const clsBankClient& Client : vClients)
+		{
+			PrintClientLine(Client);
+		}
+	else
+		cout << "No clients are found\n";
+
+	cout << "\n____________________________________________________________________________________________________________________" << endl;
 }
 
 int main()
