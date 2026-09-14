@@ -11,7 +11,7 @@ class clsBankClient :
     public clsPerson
 {
 private:
-    enum enMode { _EmptyMode = 0, _UpdateMode };
+    enum enMode { _EmptyMode = 0, _UpdateMode, _AddNewMode};
     enMode _Mode;
 
     std::string _AccNumber;
@@ -81,6 +81,24 @@ private:
 
             File.close();
         }
+    }
+
+    void _AddDataLineToFile(const std::string& Line)
+    {
+        std::fstream File;
+
+        File.open("Clients.txt", std::ios::out | std::ios::app);
+
+        if (File.is_open())
+        {
+            File << Line << std::endl;
+            File.close();
+        }
+    }
+
+    void _AddNew()
+    {
+        _AddDataLineToFile(_ConvertObjectToLine(*this));
     }
 
     void _Update() const
@@ -209,7 +227,7 @@ public:
         return _EmptyObject();
     }
 
-    enum enSaveResult { eFailedEmptyObject = 0, eSucceeded };
+    enum enSaveResult { eFailedEmptyObject = 0, eSucceeded, eFailedExistingAccNumber};
     enSaveResult Save()
     {
         switch (_Mode)
@@ -220,6 +238,18 @@ public:
         case enMode::_UpdateMode:
             _Update();
             return enSaveResult::eSucceeded;
+
+        case enMode::_AddNewMode:
+            if (IsClientExist(this->AccNumber()))
+            {
+                return enSaveResult::eFailedExistingAccNumber;
+            }
+            else
+            {
+                _AddNew();
+                this->_Mode = enMode::_UpdateMode;
+                return enSaveResult::eSucceeded;
+            }
         }
     }
 
@@ -228,5 +258,10 @@ public:
         clsBankClient Client = Find(AccNumber);
 
         return !Client.IsEmpty();
+    }
+
+    static clsBankClient AddNewObject(const std::string& AccNumber)
+    {
+        return clsBankClient("", "", "", "", AccNumber, "", 0.0, enMode::_AddNewMode);
     }
 };
