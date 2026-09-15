@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include "clsDepositScreen.h"
+#include "clsWithdrawScreen.h"
 
 class clsTransactionMenu :
     protected clsScreen
@@ -70,7 +71,7 @@ private:
 	static void _ShowWithdrawScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("WITHDRAW SCREEN");
+		clsWithdrawScreen::Withdraw();
 	}
 
 	static void _ShowTotalBalanceScreen()

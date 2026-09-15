@@ -272,6 +272,20 @@ public:
 		Save();
 	}
 
+	bool Withdraw(double Amount)
+	{
+		if (Amount > this->Balance())
+		{
+			return false;
+		}
+		else
+		{
+			_Balance -= Amount;
+			Save();
+			return true;
+		}
+	}
+
     static bool IsClientExist(const std::string& AccNumber)
     {
         clsBankClient Client = Find(AccNumber);
