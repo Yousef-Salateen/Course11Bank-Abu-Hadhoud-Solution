@@ -5,6 +5,7 @@
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsClientListScreen.h"
+#include "clsAddNewClientScreen.h"
 
 class clsMainMenuScreen :
     protected clsScreen
@@ -84,8 +85,7 @@ private:
 	static void _ShowAddNewClientScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("ADD NEW CLIENT SCREEN");
-		std::cout << "This is where the add new client functionality will be implemented.\n";
+		clsAddNewClientScreen::AddClient();
 	}
 
 	static void _ShowDeleteClientScreen()

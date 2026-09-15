@@ -167,21 +167,6 @@ public:
         return _MarkedForDelete;
     }
 
-    void Print() const
-    {
-        std::cout << "\nClient Card:";
-        std::cout << "\n_________________";
-        std::cout << "\nFirst Name: " << FirstName();
-        std::cout << "\nLast Name: " << LastName();
-        std::cout << "\nFull Name: " << FullName();
-        std::cout << "\nEmail: " << Email();
-        std::cout << "\nPhone: " << Phone();
-        std::cout << "\nAccount Number: " << AccNumber();
-        std::cout << "\nPin Code: " << PinCode();
-        std::cout << "\nBalance: " << Balance();
-        std::cout << "\n_________________" << std::endl;
-    }
-
     static clsBankClient Find(const std::string& AccNumber)
     {
         std::fstream File;
