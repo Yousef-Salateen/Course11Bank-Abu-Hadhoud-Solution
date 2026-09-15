@@ -8,6 +8,7 @@
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
 #include "clsUpdateClientScreen.h"
+#include "clsFindClientScreen.h"
 
 class clsMainMenuScreen :
     protected clsScreen
@@ -105,8 +106,7 @@ private:
 	static void _ShowFindClientScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("FIND CLIENT SCREEN");
-		std::cout << "This is where the find client functionality will be implemented.\n";
+		clsFindClientScreen::FindClient();
 	}
 
 	static void _ShowTransactionsScreen()
