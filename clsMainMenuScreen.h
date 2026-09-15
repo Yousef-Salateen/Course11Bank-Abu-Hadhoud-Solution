@@ -10,6 +10,7 @@
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
 #include "clsTransactionMenu.h"
+#include "clsManageUsersScreen.h"
 
 class clsMainMenuScreen :
     protected clsScreen
@@ -67,7 +68,6 @@ private:
 			break;
 		case enMainMenuOptions::eManageUsersScreen:
 			_ShowManageUsersScreen();
-			_WaitForEnter();
 			break;
 		case enMainMenuOptions::eExit:
 			_ShowExitScreen();
@@ -118,8 +118,7 @@ private:
 	static void _ShowManageUsersScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("MANAGE USERS SCREEN");
-		std::cout << "This is where the manage users functionality will be implemented.\n";
+		clsManageUsersScreen::ShowManageUsersScreen();
 	}
 
 	static void _ShowExitScreen()
