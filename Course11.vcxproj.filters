@@ -41,6 +41,12 @@
     <ClInclude Include="clsBankClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsMainMenuScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Course11.rc">

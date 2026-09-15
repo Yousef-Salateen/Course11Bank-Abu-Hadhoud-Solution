@@ -3,7 +3,7 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 #include "clsUtility.h"
-
+#include "clsMainMenuScreen.h"
 using namespace std;
 
 static void ReadClient(clsBankClient& Client)
@@ -178,5 +178,5 @@ static void PrintClientBalanceList()
 
 int main()
 {
-	
+	clsMainMenuScreen::ShowMainMenuScreen();
 }
