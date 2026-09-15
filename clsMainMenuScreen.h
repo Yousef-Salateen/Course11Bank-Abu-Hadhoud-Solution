@@ -7,6 +7,7 @@
 #include "clsClientListScreen.h"
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
+#include "clsUpdateClientScreen.h"
 
 class clsMainMenuScreen :
     protected clsScreen
@@ -98,8 +99,7 @@ private:
 	static void _ShowUpdateClientScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("UPDATE CLIENT SCREEN");
-		std::cout << "This is where the update client functionality will be implemented.\n";
+		clsUpdateClientScreen::UpdateClient();
 	}
 
 	static void _ShowFindClientScreen()
