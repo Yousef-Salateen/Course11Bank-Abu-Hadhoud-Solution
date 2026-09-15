@@ -6,6 +6,7 @@
 #include "clsScreen.h"
 #include "clsClientListScreen.h"
 #include "clsAddNewClientScreen.h"
+#include "clsDeleteClientScreen.h"
 
 class clsMainMenuScreen :
     protected clsScreen
@@ -91,8 +92,7 @@ private:
 	static void _ShowDeleteClientScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("DELETE CLIENT SCREEN");
-		std::cout << "This is where the delete client functionality will be implemented.\n";
+		clsDeleteClientScreen::DeleteClient();
 	}
 
 	static void _ShowUpdateClientScreen()
@@ -131,6 +131,7 @@ private:
 
 	static void _WaitForEnter()
 	{
+		std::cout << "\nPress Enter to continue...";
 		std::cin.get();
 	}
 
