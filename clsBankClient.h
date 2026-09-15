@@ -266,6 +266,12 @@ public:
         return true;
     }
 
+	void Deposit(double Amount)
+	{
+		_Balance += Amount;
+		Save();
+	}
+
     static bool IsClientExist(const std::string& AccNumber)
     {
         clsBankClient Client = Find(AccNumber);
