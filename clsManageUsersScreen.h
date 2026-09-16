@@ -8,6 +8,7 @@
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
 
 class clsManageUsersScreen :
     protected clsScreen
@@ -95,8 +96,7 @@ private:
 	static void _ShowFindUserScreen()
 	{
 		_ClearScreen();
-		std::cout << "This is where the find user functionality will be implemented.\n";
-		//clsFindUserScreen::FindUser();
+		clsFindUserScreen::FindUser();
 	}
 
 	static void _ShowExitScreen()
