@@ -124,12 +124,20 @@ private:
     }
 
 public:
+	enum enPermissions { eAll = -1, eListClients = 1, eAddNewClient = 2, eDeleteClient = 4, eUpdateClient = 8,
+                        eFindClient = 16, eTransactions = 32, eManageUsers = 64 };
+
     clsUser(const std::string& FirstName, const std::string& LastName, const std::string& Email, const std::string& Phone,
         const std::string& Username, const std::string& Password, int Permissions, enMode Mode)
         : clsPerson(FirstName, LastName, Email, Phone), _Username(Username), _Password(Password), _Permissions(Permissions), _Mode(Mode)
     {
 
     }
+
+	void setUsername(const std::string& Username)
+	{
+		_Username = Username;
+	}
 
     void setPassword(const std::string& Password)
     {
