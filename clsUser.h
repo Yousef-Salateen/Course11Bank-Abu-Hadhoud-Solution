@@ -256,7 +256,11 @@ public:
     bool Delete()
     {
         std::vector<clsUser> vUsers = _LoadUserDataFromFile();
-
+		if (this->Username() == "Admin")
+		{
+			std::cout << "Cannot delete the admin user." << std::endl;
+			return false;
+		}
         for (clsUser& User : vUsers)
         {
             if (this->Username() == User.Username())
