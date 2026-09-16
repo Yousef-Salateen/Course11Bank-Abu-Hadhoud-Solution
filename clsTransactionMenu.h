@@ -84,12 +84,15 @@ private:
 	static void _ShowExitScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("EXIT SCREEN");
+		std::cout << "Exiting the menu.\n";
 	}
 
 public:
 	static void ShowTransactionScreen()
 	{
+		if(!_CheckAccessRights(clsUser::enPermissions::eTransactions))
+			return;
+
 		enTransactionMenuOptions MainMenuOption;
 		do
 		{

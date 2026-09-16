@@ -3,10 +3,14 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 #include "clsUtility.h"
-#include "clsMainMenuScreen.h"
+#include "clsLoginScreen.h"
 using namespace std;
 
 int main()
 {
-	clsMainMenuScreen::ShowMainMenuScreen();
+	while (true)
+	{
+		clsLoginScreen::Login();
+	}
+	return 0;
 }

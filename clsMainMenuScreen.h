@@ -10,6 +10,8 @@
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
 #include "clsTransactionMenu.h"
+#include "clsManageUsersScreen.h"
+#include "Global.h"
 
 class clsMainMenuScreen :
     protected clsScreen
@@ -24,13 +26,13 @@ private:
 		eFindClient,
 		eShowTransactionsScreen,
 		eManageUsersScreen,
-		eExit
+		eLogout
 	};
 
 	static enMainMenuOptions _ReadMainMenuOption()
 	{
 		return static_cast<enMainMenuOptions>(clsInputValidate::ReadInRange<int>("\nChoose what do you want to do? [1 to 8] : ",
-			1, enMainMenuOptions::eExit));
+			1, enMainMenuOptions::eLogout));
 	}
 
 	static void _ClearScreen()
@@ -67,11 +69,9 @@ private:
 			break;
 		case enMainMenuOptions::eManageUsersScreen:
 			_ShowManageUsersScreen();
-			_WaitForEnter();
 			break;
-		case enMainMenuOptions::eExit:
-			_ShowExitScreen();
-			_WaitForEnter();
+		case enMainMenuOptions::eLogout:
+			_Logout();
 			break;
 		default:
 			std::cout << "Invalid option! Please try again.\n";
@@ -118,14 +118,13 @@ private:
 	static void _ShowManageUsersScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("MANAGE USERS SCREEN");
-		std::cout << "This is where the manage users functionality will be implemented.\n";
+		clsManageUsersScreen::ShowManageUsersScreen();
 	}
 
-	static void _ShowExitScreen()
+	static void _Logout()
 	{
 		_ClearScreen();
-		std::cout << "Exiting the application. Goodbye!\n";
+		CurrentUser = clsUser::Find("");
 	}
 
 	static void _WaitForEnter()
@@ -149,11 +148,11 @@ public:
 			std::cout << std::setw(37) << std::left << "" << "[5] Find Client.\n";
 			std::cout << std::setw(37) << std::left << "" << "[6] Show Transactions Screen.\n";
 			std::cout << std::setw(37) << std::left << "" << "[7] Manage Users Screen.\n";
-			std::cout << std::setw(37) << std::left << "" << "[8] Exit.\n";
+			std::cout << std::setw(37) << std::left << "" << "[8] Logout.\n";
 
 			MainMenuOption = _ReadMainMenuOption();
 			_PerformMainMenuOption(MainMenuOption);
-		} while (MainMenuOption != enMainMenuOptions::eExit);
+		} while (MainMenuOption != enMainMenuOptions::eLogout);
 
 	}
 };
