@@ -77,7 +77,8 @@ private:
         {
             for (const clsUser& User : vUsers)
             {
-                File << _ConvertObjectToLine(User) << std::endl;
+				if (!User.MarkedForDelete())
+                    File << _ConvertObjectToLine(User) << std::endl;
             }
 
             File.close();

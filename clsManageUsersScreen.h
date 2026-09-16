@@ -6,6 +6,7 @@
 #include "clsScreen.h"
 #include "clsListUsersScreen.h"
 #include "clsAddNewUserScreen.h"
+#include "clsDeleteUserScreen.h"
 
 class clsManageUsersScreen :
     protected clsScreen
@@ -81,8 +82,7 @@ private:
 	static void _ShowDeleteUserScreen()
 	{
 		_ClearScreen();
-		std::cout << "This is where the delete user functionality will be implemented.\n";
-		//clsDeleteUserScreen::DeleteUser();
+		clsDeleteUserScreen::DeleteUser();
 	}
 
 	static void _ShowUpdateUserScreen()
