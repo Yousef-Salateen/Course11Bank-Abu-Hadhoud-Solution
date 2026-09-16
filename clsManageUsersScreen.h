@@ -7,6 +7,7 @@
 #include "clsListUsersScreen.h"
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
+#include "clsUpdateUserScreen.h"
 
 class clsManageUsersScreen :
     protected clsScreen
@@ -88,8 +89,7 @@ private:
 	static void _ShowUpdateUserScreen()
 	{
 		_ClearScreen();
-		std::cout << "This is where the update user functionality will be implemented.\n";
-		//clsUpdateUserScreen::UpdateUser();
+		clsUpdateUserScreen::UpdateUser();
 	}
 
 	static void _ShowFindUserScreen()
