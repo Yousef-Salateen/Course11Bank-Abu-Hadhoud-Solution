@@ -84,7 +84,7 @@ private:
 	static void _ShowExitScreen()
 	{
 		_ClearScreen();
-		_DrawScreenHeader("EXIT SCREEN");
+		std::cout << "Exiting the menu.\n";
 	}
 
 public:
