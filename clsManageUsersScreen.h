@@ -114,6 +114,9 @@ private:
 public:
 	static void ShowManageUsersScreen()
 	{
+		if (!_CheckAccessRights(clsUser::enPermissions::eManageUsers))
+			return;
+
 		enManageUsersOptions ManageUsersOption;
 		do
 		{

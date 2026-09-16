@@ -90,6 +90,9 @@ private:
 public:
 	static void ShowTransactionScreen()
 	{
+		if(!_CheckAccessRights(clsUser::enPermissions::eTransactions))
+			return;
+
 		enTransactionMenuOptions MainMenuOption;
 		do
 		{

@@ -175,6 +175,11 @@ public:
         return _MarkedForDelete;
     }
 
+	bool HasPermission(enPermissions Permission)
+	{
+		return (_Permissions & Permission) == Permission;
+	}
+
     static clsUser Find(const std::string& Username)
     {
         std::fstream File;

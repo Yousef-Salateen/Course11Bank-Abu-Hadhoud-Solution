@@ -22,6 +22,9 @@ public:
 
 	static void PrintClientList()
 	{
+		if (!_CheckAccessRights(clsUser::enPermissions::eListClients))
+			return;
+
 		std::vector <clsBankClient> vClients = clsBankClient::GetClientList();
 
 		std::string Title = "Client List Screen";

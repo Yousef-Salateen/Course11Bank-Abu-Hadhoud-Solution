@@ -38,6 +38,9 @@ public:
 
     static void AddClient()
     {
+        if (!_CheckAccessRights(clsUser::enPermissions::eAddNewClient))
+            return;
+
         _DrawScreenHeader("Add New Client Screen");
         std::string AccNumber = clsInputValidate::Read<std::string>("Please Enter a Valid Account Number : ");
 

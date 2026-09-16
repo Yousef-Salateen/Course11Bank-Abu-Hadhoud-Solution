@@ -26,6 +26,9 @@ private:
 public:
 	static void FindClient()
 	{
+		if (!_CheckAccessRights(clsUser::enPermissions::eFindClient))
+			return;
+
 		_DrawScreenHeader("Update Client Screen");
 		std::string AccNumber = clsInputValidate::Read<std::string>("Please Enter a Valid Account Number: ");
 
