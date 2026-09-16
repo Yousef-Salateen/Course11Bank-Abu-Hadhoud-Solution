@@ -8,6 +8,9 @@ using namespace std;
 
 int main()
 {
-	clsLoginScreen::Login();
+	while (true)
+	{
+		clsLoginScreen::Login();
+	}
 	return 0;
 }
